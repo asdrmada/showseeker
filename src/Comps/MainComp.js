@@ -8,20 +8,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 const locationSearch = 'bristol'; 
+const artistSearch   = 'ministry'
 
-const SK_API_ARTISTDATES = 'https://api.songkick.com/api/3.0/artists//calendar.json?apikey=E3ZwjI3B1GSjGTe1'
+// const SK_API_ARTISTDATES = 'https://api.songkick.com/api/3.0/artists//calendar.json?apikey=E3ZwjI3B1GSjGTe1'
 const SK_API_LOCATIONDATES = 'https://api.songkick.com/api/3.0/metro_areas/{metro_area_id}/calendar.json?apikey=E3ZwjI3B1GSjGTe1'
 
 const SK_API_LOCALSEARCH = `https://api.songkick.com/api/3.0/search/locations.json?query=${locationSearch}&apikey=E3ZwjI3B1GSjGTe1`
-// const SK_API_ARTISTSEARCH = `https://api.songkick.com/api/3.0/search/artists.json?apikey=E3ZwjI3B1GSjGTe1&query=${artistSearch}`
-
-
-// const [areaSearch, setAreaSearch] = useState(locationSearch);
+const SK_API_ARTISTSEARCH = `https://api.songkick.com/api/3.0/search/artists.json?apikey=E3ZwjI3B1GSjGTe1&query=${artistSearch}`
 
 export class MainComp extends Component {
 
     async componentDidMount(){
-       let test = await axios.get(`${SK_API_LOCALSEARCH}`)
+       let test = await axios.get(`${SK_API_ARTISTSEARCH}`)
        console.log(test.data)
     }
 
