@@ -10,30 +10,36 @@ function RegionSearchRender({ regionSearch }){
 
   const [regionRequest, changeRegionRequest] = useState('')
   const [locationChoices, setLocationChoices] = useState([]);
+  // const [locationCode, setLocationCode] = useState('');
   const [dates, setDates] = useState([]);
 
   const SK_API_LOCALSEARCH = `https://api.songkick.com/api/3.0/search/locations.json?query=`
-// const SK_API_LOCATIONDATES = 'https://api.songkick.com/api/3.0/metro_areas/{metro_area_id}/calendar.json?apikey=E3ZwjI3B1GSjGTe1'
+  const SK_API_LOCATIONDATES = 'https://api.songkick.com/api/3.0/metro_areas'
 
   useEffect( () => {
     async function reqGet() {
       const searchReq = await axios.get(`${SK_API_LOCALSEARCH}${regionRequest}&apikey=E3ZwjI3B1GSjGTe1`);
       let regRet = searchReq.data.resultsPage.results.location
-
       setLocationChoices(regRet); 
+      let locationCode = regRet[0].metroArea.id
       
       console.log(regRet);
-      console.log(locationChoices);
+      console.log(locationCode);
+      
+      const reqDates = await axios.get(`${SK_API_LOCATIONDATES}/${locationCode}/calendar.json?apikey=E3ZwjI3B1GSjGTe1`)
+      let locDates = reqDates.data.resultsPage.results.event
+      setDates(locDates);
+      console.log(dates);
     }
    reqGet();
   }
   , [regionRequest]);
 
-  const renderRegions = locationChoices.slice(0,5).map(l =>(
-    <Card>
-      <CardContent variant='outlined' key = { uuidv4() }>
-        <h6>{l.city.displayName}</h6>
-       <p>{l.city.country.displayName}</p>
+  const renderDates = dates.slice(0,5).map(l =>(
+    <Card key = { uuidv4() }>
+      <CardContent variant='outlined'>
+        <h6>{l.displayName}</h6>
+        <p>{l.venue.displayName}</p>
       </CardContent>
     </Card>
 ))
@@ -44,8 +50,9 @@ function RegionSearchRender({ regionSearch }){
           Search here!
         </Button>
 
+        {/* <h1>{locationChoices.metroArea.displayName}</h1> */}
 
-        {renderRegions}
+        {renderDates}
       </>
     )
 }
