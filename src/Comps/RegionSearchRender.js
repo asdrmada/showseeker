@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,11 +13,29 @@ function RegionSearchRender({ regionSearch }){
 
   const [regionRequest, changeRegionRequest] = useState('')
   const [locationChoices, setLocationChoices] = useState([]);
-  // const [locationCode, setLocationCode] = useState('');
   const [dates, setDates] = useState([]);
 
   const SK_API_LOCALSEARCH = `https://api.songkick.com/api/3.0/search/locations.json?query=`
   const SK_API_LOCATIONDATES = 'https://api.songkick.com/api/3.0/metro_areas'
+
+  const useStyles = makeStyles({
+    root: {
+      minWidth: 275,
+      maxWidth: 275,
+      marginBottom: 25,
+      maxHeight: 300,
+      marginLeft:20,
+      marginRight:20,
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    }
+  })
+
+  const classes = useStyles();
 
   useEffect( () => {
     async function reqGet() {
@@ -35,25 +56,35 @@ function RegionSearchRender({ regionSearch }){
   }
   , [regionRequest]);
 
-  const renderDates = dates.slice(0,5).map(l =>(
-    <Card key = { uuidv4() }>
+  const renderDates = dates.slice(0,10).map(l =>(
+
+    <Card key = { uuidv4() } className = {classes.root} variant = 'outlined' style = {{boxShadow: '5px 10px 8px'}}>
       <CardContent variant='outlined'>
-        <h6>{l.displayName}</h6>
-        <p>{l.venue.displayName}</p>
+        <Typography>
+         {l.displayName}
+        </Typography>
+
+        <Typography>
+         {l.venue.displayName}
+        </Typography>
       </CardContent>
     </Card>
+
 ))
 
     return(
-      <>
+    <>
         <Button variant="contained" color="secondary" onClick={() => changeRegionRequest(regionSearch)}>
           Search here!
         </Button>
 
-        {/* <h1>{locationChoices.metroArea.displayName}</h1> */}
+      <div style = {{width: '%' }}>
+        <Box display= 'flex' flexWrap = 'wrap' justifyContent="center">
+          {renderDates}
+        </Box>
+      </div>
 
-        {renderDates}
-      </>
+    </>
     )
 }
 
