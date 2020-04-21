@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Button, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, emphasize } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -29,6 +29,7 @@ function RegionSearchRender({ regionSearch }){
     },
     title: {
       fontSize: 14,
+      textEmphasis: 10
     },
     pos: {
       marginBottom: 12,
@@ -49,6 +50,7 @@ function RegionSearchRender({ regionSearch }){
       
       const reqDates = await axios.get(`${SK_API_LOCATIONDATES}/${locationCode}/calendar.json?apikey=E3ZwjI3B1GSjGTe1`)
       let locDates = reqDates.data.resultsPage.results.event
+      console.log(locDates);
       setDates(locDates);
       console.log(dates);
     }
@@ -60,13 +62,19 @@ function RegionSearchRender({ regionSearch }){
 
     <Card key = { uuidv4() } className = {classes.root} variant = 'outlined' style = {{boxShadow: '5px 10px 8px'}}>
       <CardContent variant='outlined'>
-        <Typography>
+        <Typography variant = 'h6'>
          {l.displayName}
         </Typography>
+
+
 
         <Typography>
          {l.venue.displayName}
         </Typography>
+       <hr></hr>
+       <Typography>
+        <a href={l.uri}>More Info</a>
+       </Typography>
       </CardContent>
     </Card>
 

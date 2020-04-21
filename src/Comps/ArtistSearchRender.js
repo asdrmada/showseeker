@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
+import { makeStyles, emphasize } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,6 +16,26 @@ function ArtistSearchRender({ artistSearch }){
 
     const SK_API_ARTISTDATES = 'https://api.songkick.com/api/3.0/artists/'
     const SK_API_ARTISTSEARCH = `https://api.songkick.com/api/3.0/search/artists.json?apikey=E3ZwjI3B1GSjGTe1&query=${artistRequest}`
+
+    const useStyles = makeStyles({
+      root: {
+        minWidth: 275,
+        maxWidth: 275,
+        marginBottom: 25,
+        maxHeight: 300,
+        marginLeft:20,
+        marginRight:20,
+      },
+      title: {
+        fontSize: 14,
+        textEmphasis: 10
+      },
+      pos: {
+        marginBottom: 12,
+      }
+    })
+  
+    const classes = useStyles();
 
     useEffect( () => {
       async function reqGet() {
@@ -30,12 +53,25 @@ function ArtistSearchRender({ artistSearch }){
     }
     , [artistRequest]);
 
-    const renderDates = dates.map(d =>(
-        <Card>
-          <CardContent variant='outlined' key = { uuidv4() }>
-            <h1>{d.displayName}</h1>
-          </CardContent>
-        </Card>
+    const renderDates = dates.slice(0,10).map(d =>(
+
+      <Card key = { uuidv4() } className = {classes.root} variant = 'outlined' style = {{boxShadow: '5px 10px 8px'}}>
+        <CardContent variant='outlined'>
+          <Typography variant = 'h6'>
+           {d.displayName}
+          </Typography>
+  
+  
+  
+          <Typography>
+           {d.venue.displayName}
+          </Typography>
+         <hr></hr>
+         <Typography>
+          <a href={d.uri}>More Info</a>
+         </Typography>
+        </CardContent>
+      </Card>
     ))
 
 
@@ -46,10 +82,11 @@ function ArtistSearchRender({ artistSearch }){
           Search here!
         </Button>
 
-
-        <h5>{artistRequest}</h5>
-
-        {renderDates}
+      <div style = {{width: '%' }}>
+        <Box display= 'flex' flexWrap = 'wrap' justifyContent="center">
+          {renderDates}
+        </Box>
+      </div>
       </>
 
     )

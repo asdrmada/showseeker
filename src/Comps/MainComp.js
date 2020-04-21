@@ -1,9 +1,13 @@
 import React, { Component, useState } from 'react';
 import axios from 'axios';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 import RegionSearch from './RegionSearch';
 import ArtistSearch from './ArtistSearch';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 export class MainComp extends Component {
@@ -12,18 +16,50 @@ export class MainComp extends Component {
         return (
 
          <>
-            <AppBar color = 'primary' position = 'static' style = {{height : '64px'}}>
-                <Toolbar>
-                    <Typography variant="h4" color="inherit" style={{marginRight: '1.5rem'}}>
-                        ShowSeeker
-                    </Typography>
-                    <Typography variant="h6" color="inherit">
-                        Find gigs for your area and favourite acts!
-                    </Typography>
-                </Toolbar>
-            </AppBar>
+            <div>
+                <Typography>
+                   <h1>Showseeker</h1>
+                </Typography>
+                <Typography>
+                   <h3>Find your next gig!</h3>
+                </Typography>
 
-                <RegionSearch />
+            </div>
+
+        {/* <Router>
+                <div>
+                    <ul>
+                     <li>
+                         <Link to='/'>Home</Link>
+                     </li>
+                     <li>
+                         <Link to='/artists'>Search Artists</Link>
+                     </li>
+                     <li>
+                         <Link to='/area'>Search for your Area</Link>
+                     </li>
+                    </ul>
+                </div>
+
+            <Switch>
+                <Route exact path='/'>
+                    <MainComp />
+                </Route>
+                <Route exact path='/artists'>
+                    <ArtistSearch />
+                </Route>
+                <Route exact path='/area'>
+                    <RegionSearch />
+                </Route>
+            </Switch>
+             
+        </Router> */}
+
+
+
+                {/* <ArtistSearch />
+
+                <RegionSearch /> */}
 
         </>
 
