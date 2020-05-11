@@ -78,7 +78,7 @@ function ArtistSearchRender({ artistSearch }){
     return(
     
       <>
-        <Button variant="contained" color="secondary" onClick={ () => changeArtistRequest(artistSearch)}>
+        <Button variant="contained" color="primary" onClick={ () => changeArtistRequest(artistSearch)}>
           Search here!
         </Button>
 

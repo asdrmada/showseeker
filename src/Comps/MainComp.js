@@ -1,70 +1,47 @@
 import React, { Component, useState } from 'react';
-import axios from 'axios';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-import RegionSearch from './RegionSearch';
-import ArtistSearch from './ArtistSearch';
+import './MainComp.css';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles} from '@material-ui/core/styles';
 
-export class MainComp extends Component {
 
-    render() {
+function MainComp() {
+
+    const useStyles = makeStyles({
+        title: {
+          fontSize: 40
+        },
+        subtitle: {
+          fontSize: 25
+        }
+      })
+
+    const classes = useStyles();
+
         return (
 
          <>
+           <div className = 'mc-background'>
             <div>
-                <Typography>
+                <Typography className = {classes.title}>
                    <h1>Showseeker</h1>
                 </Typography>
-                <Typography>
+                <Typography className = {classes.subtitle}>
                    <h3>Find your next gig!</h3>
                 </Typography>
-
             </div>
 
-        {/* <Router>
-                <div>
-                    <ul>
-                     <li>
-                         <Link to='/'>Home</Link>
-                     </li>
-                     <li>
-                         <Link to='/artists'>Search Artists</Link>
-                     </li>
-                     <li>
-                         <Link to='/area'>Search for your Area</Link>
-                     </li>
-                    </ul>
-                </div>
-
-            <Switch>
-                <Route exact path='/'>
-                    <MainComp />
-                </Route>
-                <Route exact path='/artists'>
-                    <ArtistSearch />
-                </Route>
-                <Route exact path='/area'>
-                    <RegionSearch />
-                </Route>
-            </Switch>
-             
-        </Router> */}
-
-
-
-                {/* <ArtistSearch />
-
-                <RegionSearch /> */}
-
+            <div>
+              <footer>
+                Alex Newman, 2020
+              </footer>
+              <footer>
+                powered by <a href = 'https://www.songkick.com/'>Songkick</a>
+              </footer>
+            </div>
+          </div>
         </>
 
         )
     }
-}
 
 export default MainComp

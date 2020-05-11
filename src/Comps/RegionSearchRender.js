@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Button, Typography } from '@material-ui/core';
-import { makeStyles, emphasize } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+import './RegionSearchRender.css'
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -81,6 +80,7 @@ function RegionSearchRender({ regionSearch }){
 ))
 
     return(
+    
     <>
         <Button variant="contained" color="secondary" onClick={() => changeRegionRequest(regionSearch)}>
           Search here!
@@ -93,6 +93,7 @@ function RegionSearchRender({ regionSearch }){
       </div>
 
     </>
+    
     )
 }
 

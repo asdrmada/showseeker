@@ -9,6 +9,7 @@ import RegionSearch from './Comps/RegionSearch';
 import ArtistSearch from './Comps/ArtistSearch';
 import MainComp from './Comps/MainComp';
 import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -16,7 +17,18 @@ import Typography from '@material-ui/core/Typography';
 import './App.css';
 
 function App() {
+
+  const useStyles = makeStyles({
+    spacing: {
+      marginTop: 20,
+      marginBottom: 20
+    }
+  })
+
+  const classes = useStyles();
+
   return (
+  <>
     <div className="App">
 
       <AppBar color = 'primary' position = 'static' style = {{height : '64px'}}>
@@ -30,25 +42,28 @@ function App() {
         </Toolbar>
       </AppBar>
 
+      
+      <ul className="background-slideshow">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+
       <Router>
-                <div>
-                    <ul>
-                     <li>
+                    <div className = {classes.spacing}>
                          <Link to='/artists'>
                             <Button variant="contained" color="primary">
                               Search Artists/Bands
                             </Button>
                          </Link>
-                     </li>
-                     <li>
+              
                          <Link to='/area'>
                             <Button variant="contained" color="secondary">
                               Search Cities/Areas
                             </Button>
                          </Link>
-                     </li>
-                    </ul>
-                </div>
+                    </div>
 
             <Switch>
                 <Route exact path='/'>
@@ -61,13 +76,13 @@ function App() {
                     <RegionSearch />
                 </Route>
             </Switch>
+
              
         </Router>
 
-
-      {/* <MainComp></MainComp> */}
-      
     </div>
+  </>
+
   );
 }
 
