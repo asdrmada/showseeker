@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, Typography } from '@material-ui/core';
-import { makeStyles, emphasize } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -40,18 +38,22 @@ function ArtistSearchRender({ artistSearch }){
     useEffect( () => {
       async function reqGet() {
         const searchReq = await axios.get(`${SK_API_ARTISTSEARCH}`);
+        
+        if(searchReq.data.resultsPage.results.artist === undefined){
+          window.location.reload()
+        } else {
         let artistId = searchReq.data.resultsPage.results.artist[0].id;
-
         const searchRet = await axios.get(`${SK_API_ARTISTDATES}${artistId}/calendar.json?apikey=E3ZwjI3B1GSjGTe1`)
         let  artistDates = searchRet.data.resultsPage.results.event;
 
         setDates(artistDates);  
         
         console.log(artistDates);
+        }
       }
      reqGet();
     }
-    , [artistRequest]);
+    ,);
 
     const renderDates = dates.slice(0,10).map(d =>(
 

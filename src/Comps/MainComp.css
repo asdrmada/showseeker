@@ -1,4 +1,9 @@
-.mc-background {
-    /* min-height: 100vh;
-    max-height: 100vh; */
+#main-title {
+    text-shadow: 2px 2px 4px rgb(201, 199, 199);
+    font-family: DM Mono, sans-serif;
+}
+
+#sub-title {
+    text-shadow: 2px 2px 4px rgb(201, 199, 199);
+    font-family: Open Sans;
 }

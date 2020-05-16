@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 import './MainComp.css';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles} from '@material-ui/core/styles';
@@ -23,10 +23,10 @@ function MainComp() {
            <div className = 'mc-background'>
             <div>
                 <Typography className = {classes.title}>
-                   <h1>Showseeker</h1>
+                   <h1  id = 'main-title'>ShowSeeker</h1>
                 </Typography>
                 <Typography className = {classes.subtitle}>
-                   <h3>Find your next gig!</h3>
+                   <h3  id = 'sub-title'>Find your next gig!</h3>
                 </Typography>
             </div>
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import './RegionSearchRender.css'
 import Card from '@material-ui/core/Card';
 import Box from '@material-ui/core/Box';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,7 +10,6 @@ import { v4 as uuidv4 } from 'uuid';
 function RegionSearchRender({ regionSearch }){
 
   const [regionRequest, changeRegionRequest] = useState('')
-  const [locationChoices, setLocationChoices] = useState([]);
   const [dates, setDates] = useState([]);
 
   const SK_API_LOCALSEARCH = `https://api.songkick.com/api/3.0/search/locations.json?query=`
@@ -41,21 +39,21 @@ function RegionSearchRender({ regionSearch }){
     async function reqGet() {
       const searchReq = await axios.get(`${SK_API_LOCALSEARCH}${regionRequest}&apikey=E3ZwjI3B1GSjGTe1`);
       let regRet = searchReq.data.resultsPage.results.location
-      setLocationChoices(regRet); 
+      if(regRet === undefined){
+        window.location.reload()
+      } else {
       let locationCode = regRet[0].metroArea.id
-      
-      console.log(regRet);
-      console.log(locationCode);
       
       const reqDates = await axios.get(`${SK_API_LOCATIONDATES}/${locationCode}/calendar.json?apikey=E3ZwjI3B1GSjGTe1`)
       let locDates = reqDates.data.resultsPage.results.event
       console.log(locDates);
       setDates(locDates);
       console.log(dates);
+      }
     }
    reqGet();
   }
-  , [regionRequest]);
+  ,);
 
   const renderDates = dates.slice(0,10).map(l =>(
 

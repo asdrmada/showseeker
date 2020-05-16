@@ -12,10 +12,14 @@ function RegionSearch() {
       <>
         <FormControl>
           <form>
-            <InputLabel htmlFor="my-input">Search here!</InputLabel>
+            <InputLabel htmlFor="my-input">
+              <span className ='search-handle'>Enter here!</span>
+            </InputLabel>
             <Input id="my-input" aria-describedby="my-helper-text" type='text' 
             value={regionSearch} onChange={e => changeRegionSearch(e.target.value)}/>
-            <FormHelperText id="my-helper-text">Type your city and country/state code, then click enter!</FormHelperText>
+            <FormHelperText id="my-helper-text">
+              <span className = 'search-help'>Type your city and country/state code, then click enter!</span>
+            </FormHelperText>
           </form>
         </FormControl>
 
